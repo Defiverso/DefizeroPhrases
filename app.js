@@ -13,10 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const networkWarningEl = document.getElementById('network-warning');
 
   async function checkNetwork() {
-    if (!provider) return false;
+  if (!provider) return false;
+  
+  try {
+    // Usar detectNetwork() para obter a rede atual corretamente
+    const network = await provider.detectNetwork();
     
-    const network = await provider.getNetwork();
-    if (network.chainId !== parseInt(SEPOLIA_CHAIN_ID, 16)) {
+    // ChainId correto para Sepolia (11155111)
+    if (network.chainId !== 11155111) {
       networkWarningEl.classList.remove('hidden');
       actionsEl.classList.add('hidden');
       return false;
@@ -25,7 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
       actionsEl.classList.remove('hidden');
       return true;
     }
+  } catch (err) {
+    console.error("Error detecting network:", err);
+    return false;
   }
+}
 
   async function switchToSepolia() {
     try {
@@ -105,12 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   if (window.ethereum) {
-    window.ethereum.on('chainChanged', async () => {
-      if (provider) {
-        await checkNetwork();
-      }
+    window.ethereum.on('chainChanged', async (chainId) => {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+      const response = await fetch('./abi.json');
+      const abi = await response.json();
+      contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+      
+      await checkNetwork();
     });
-  }
+}
 
   const withNetworkCheck = (fn) => async (...args) => {
     if (!contract) return;
