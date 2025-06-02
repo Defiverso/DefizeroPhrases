@@ -80,15 +80,18 @@ async function getMyPhrase() {
 async function getAllPhrases() {
   if (!contract) return;
   try {
-    const phrases = await contract.getAllPhrases(); // Retorna array de [address, phrase]
+    const [addresses, phrases] = await contract.getAllPhrases();
     outputEl.innerHTML = '';
 
-    phrases.forEach(([addr, phrase]) => {
+    for (let i = 0; i < addresses.length; i++) {
+      const addr = addresses[i];
+      const phrase = phrases[i];
+
       const card = document.createElement('div');
-      card.className = 'bg-white p-4 shadow rounded';
+      card.className = 'bg-white p-4 shadow rounded mb-2';
       card.innerHTML = `<p class="text-sm font-semibold text-blue-600">${addr}</p><p>${phrase}</p>`;
       outputEl.appendChild(card);
-    });
+    }
   } catch (err) {
     console.error(err);
     alert('Error retrieving all phrases');
