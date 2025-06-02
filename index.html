@@ -4,80 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Defizero Phrases</title>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.10.0/dist/ethers.umd.min.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 1rem; }
-    input, button { margin: 0.5rem 0; padding: 0.5rem; width: 100%; }
-    .connected { color: green; font-weight: bold; }
-  </style>
 </head>
 <body>
   <h1>Defizero Phrases</h1>
-  <p id="status">Wallet not connected</p>
-  <button onclick="connect()">Connect Wallet</button>
 
-  <h3>Set or Update Your Phrase</h3>
-  <input type="text" id="myPhrase" placeholder="Type your phrase here..." />
-  <button onclick="setPhrase()">Save Phrase</button>
+  <button id="connect">Connect Wallet</button>
+  <p id="wallet"></p>
 
-  <h3>Delete Your Phrase</h3>
-  <button onclick="deletePhrase()">Delete</button>
-
-  <h3>View Your Phrase</h3>
+  <input type="text" id="phraseInput" placeholder="Enter your phrase" />
+  <button onclick="setPhrase()">Set Phrase</button>
+  <button onclick="deletePhrase()">Delete Phrase</button>
   <button onclick="getMyPhrase()">Get My Phrase</button>
-  <p><strong>Result:</strong> <span id="myPhraseResult"></span></p>
+  <button onclick="getAllPhrases()">Get All Phrases</button>
 
-  <h3>View Someone Else's Phrase</h3>
-  <input type="text" id="addressToQuery" placeholder="Enter address" />
-  <button onclick="getOtherPhrase()">Get Phrase</button>
-  <p><strong>Result:</strong> <span id="otherPhraseResult"></span></p>
+  <pre id="output"></pre>
 
-  <script>
-    const contractAddress = "COLE_O_ENDEREÇO_DO_CONTRATO_AQUI";
-    const abi = [
-      "function setPhrase(string phrase)",
-      "function deletePhrase()",
-      "function getMyPhrase() view returns (string)",
-      "function getPhraseOf(address user) view returns (string)"
-    ];
-
-    let provider, signer, contract;
-
-    async function connect() {
-      if (!window.ethereum) return alert("MetaMask not found.");
-      provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = await provider.getSigner();
-      contract = new ethers.Contract(contractAddress, abi, signer);
-      document.getElementById("status").innerText = "✅ Connected: " + (await signer.getAddress());
-      document.getElementById("status").className = "connected";
-    }
-
-    async function setPhrase() {
-      const phrase = document.getElementById("myPhrase").value;
-      if (!phrase) return alert("Please enter a phrase.");
-      const tx = await contract.setPhrase(phrase);
-      await tx.wait();
-      alert("Phrase saved!");
-    }
-
-    async function deletePhrase() {
-      const tx = await contract.deletePhrase();
-      await tx.wait();
-      alert("Phrase deleted!");
-    }
-
-    async function getMyPhrase() {
-      const phrase = await contract.getMyPhrase();
-      document.getElementById("myPhraseResult").innerText = phrase || "(no phrase)";
-    }
-
-    async function getOtherPhrase() {
-      const address = document.getElementById("addressToQuery").value;
-      if (!ethers.isAddress(address)) return alert("Invalid address.");
-      const phrase = await contract.getPhraseOf(address);
-      document.getElementById("otherPhraseResult").innerText = phrase || "(no phrase)";
-    }
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
