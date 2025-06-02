@@ -39,17 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.setPhrase = async function () {
-    const phrase = document.getElementById('phraseInput').value;
-    if (!contract) return;
-    try {
-      const tx = await contract.setPhrase(phrase);
-      await tx.wait();
-      alert('Phrase set successfully');
-    } catch (err) {
-      console.error(err);
-      alert('Failed to set phrase');
-    }
+  const phrase = document.getElementById('phraseInput').value.trim();
+  
+  if (!phrase) {
+    alert('Por favor, insira uma frase antes de enviar.');
+    return;
   }
+
+  if (!contract) return;
+  
+  try {
+    const tx = await contract.setPhrase(phrase);
+    await tx.wait();
+    alert('Phrase set successfully');
+  } catch (err) {
+    console.error(err);
+    alert('Failed to set phrase');
+  }
+}
+
 
   window.deletePhrase = async function () {
     if (!contract) return;
