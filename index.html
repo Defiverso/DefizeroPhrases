@@ -4,22 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Defizero Phrases</title>
-</head>
-<body>
-  <h1>Defizero Phrases</h1>
-
-  <button id="connect">Connect Wallet</button>
-  <p id="wallet"></p>
-
-  <input type="text" id="phraseInput" placeholder="Enter your phrase" />
-  <button onclick="setPhrase()">Set Phrase</button>
-  <button onclick="deletePhrase()">Delete Phrase</button>
-  <button onclick="getMyPhrase()">Get My Phrase</button>
-  <button onclick="getAllPhrases()">Get All Phrases</button>
-
-  <pre id="output"></pre>
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+    <h1 class="text-2xl font-bold text-center mb-4">Defizero Phrases</h1>
+
+    <button id="connect" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+      Connect Wallet
+    </button>
+    <p id="wallet" class="text-sm text-center text-gray-600 mb-4"></p>
+
+    <div id="actions" class="space-y-3 hidden">
+      <input type="text" id="phraseInput" placeholder="Enter your phrase"
+        class="w-full px-4 py-2 border rounded text-sm" />
+
+      <button onclick="setPhrase()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">
+        Set Phrase
+      </button>
+      <button onclick="deletePhrase()" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded">
+        Delete Phrase
+      </button>
+      <button onclick="getMyPhrase()" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded">
+        Get My Phrase
+      </button>
+      <button onclick="getAllPhrases()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded">
+        Get All Phrases
+      </button>
+    </div>
+
+    <div id="output" class="mt-6 space-y-2">
+      <!-- Frases renderizadas aqui -->
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
