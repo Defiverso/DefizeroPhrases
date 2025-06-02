@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const connectBtn = document.getElementById('connect');
   const walletEl = document.getElementById('wallet');
-  const actionsEl = document.getElementById('appActions');
+  const actionsEl = document.getElementById('actions');
   const outputEl = document.getElementById('output');
 
   connectBtn.onclick = async () => {
