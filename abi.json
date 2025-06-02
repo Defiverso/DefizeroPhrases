@@ -1,0 +1,40 @@
+[
+  {
+    "inputs": [{ "internalType": "string", "name": "phrase", "type": "string" }],
+    "name": "setPhrase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "deletePhrase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMyPhrase",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "user", "type": "address" }],
+    "name": "getPhraseOf",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllPhrases",
+    "outputs": [
+      { "internalType": "address[]", "name": "users", "type": "address[]" },
+      { "internalType": "string[]", "name": "phrases", "type": "string[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
