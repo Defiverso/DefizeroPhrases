@@ -2,7 +2,7 @@ let provider;
 let signer;
 let contract;
 
-const CONTRACT_ADDRESS = "0x53532C976299cD2CdED50218aAAeec565D76fb7b";
+const CONTRACT_ADDRESS = "0x65ff57a722bd17Df77D297116aBe6bB3A2Aca507";
 const ABI = fetch("./abi.json")
   .then((res) => res.json())
   .then((abi) => init(abi));
