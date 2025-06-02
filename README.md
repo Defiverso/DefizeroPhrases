@@ -9,6 +9,9 @@ Este projeto visa ensinar conceitos básicos de interação com contratos inteli
 - Interação com contratos inteligentes
 - Armazenamento e recuperação de dados descentralizados
 
+## Acesse a interface web da aplicação aqui
+👉 [https://defiverso.github.io/DefizeroPhrases/](https://defiverso.github.io/DefizeroPhrases/)
+
 ## 🪙 Como obter tokens Faucet
 
 Para testar a aplicação na rede Sepolia, você pode obter tokens de teste através da faucet:
